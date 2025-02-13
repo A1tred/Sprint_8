@@ -20,6 +20,16 @@ public class Mesto1Test {
     }
 
     @Test
+    @DisplayName("Check user name")
+    @Description("This test is for check current user's name.")
+    public void checkUserName() {
+        given()
+                .auth().oauth2(bearerToken) // Передаём токен для аутентификации
+                .get("/api/users/me") // Делаем GET-запрос
+                .then().assertThat().body("data.name", equalTo("Incorrect Name")); // Проверяем, что имя соответствует ожидаемому
+    }
+
+    @Test
     @DisplayName("Add a new photo")
     @Description("This test is for adding a new photo to Mesto.")
     public void addNewPhoto() {
